@@ -15,15 +15,12 @@ public class PaymentsApplication implements CommandLineRunner {
   @Value("${refundsPath:data/refunds.jwe}")
   private String refundsPath;
 
-  @Value("${refunds.password}")
-  private String password;
-
-  @Value("${refunds.salt}")
-  private String salt;
+  @Value("${refunds.key}")
+  private String key;
 
   @Override
   public void run(String... args) {
-    paymentService.processRefunds(Path.of(refundsPath), password, salt);
+    paymentService.processRefunds(Path.of(refundsPath), key.getBytes());
   }
 
   public static void main(String[] args) {
