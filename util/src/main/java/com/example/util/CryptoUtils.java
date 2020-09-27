@@ -18,10 +18,10 @@ import javax.crypto.spec.SecretKeySpec;
 
 public class CryptoUtils {
 
-  public static String decryptJwe(String jwe, String key, String salt) {
+  public static String decryptJwe(String jwe, String password, String salt) {
     try {
       JWEObject jweObject = JWEObject.parse(jwe);
-      jweObject.decrypt(new DirectDecrypter(deriveKey(key, salt)));
+      jweObject.decrypt(new DirectDecrypter(deriveKey(password, salt)));
       Payload payload = jweObject.getPayload();
       return payload.toString();
     } catch (ParseException | JOSEException e) {
@@ -29,12 +29,12 @@ public class CryptoUtils {
     }
   }
 
-  public static String encryptAsJwe(String content, String key, String salt) {
+  public static String encryptAsJwe(String content, String password, String salt) {
     try {
       JWEHeader header = new JWEHeader(JWEAlgorithm.DIR, EncryptionMethod.A256GCM);
       Payload payload = new Payload(content);
       JWEObject jweObject = new JWEObject(header, payload);
-      jweObject.encrypt(new DirectEncrypter(deriveKey(key, salt)));
+      jweObject.encrypt(new DirectEncrypter(deriveKey(password, salt)));
       return jweObject.serialize();
     } catch (JOSEException e) {
       throw new RuntimeException(e);

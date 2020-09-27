@@ -14,7 +14,7 @@ public class WarehouseApplication implements CommandLineRunner {
 
   @Autowired private RefundGenerationService refundGenerationService;
 
-  @Value("${refundsPath:data/refunds.aes}")
+  @Value("${refundsPath:data/refunds.jwe}")
   private String refundsPath;
 
   @Value("${refunds.password}")

@@ -9,10 +9,10 @@ import org.springframework.stereotype.Component;
 @Component
 public class PaymentService {
 
-  public void processRefunds(Path refundsFile, String key, String salt) {
+  public void processRefunds(Path refundsFile, String password, String salt) {
     try {
       String jwe = Files.readString(refundsFile);
-      String refundsJson = CryptoUtils.decryptJwe(jwe, key, salt);
+      String refundsJson = CryptoUtils.decryptJwe(jwe, password, salt);
       System.out.println("Issuing Refund to");
       System.out.println(refundsJson);
     } catch (IOException e) {

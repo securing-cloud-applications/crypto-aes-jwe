@@ -11,10 +11,10 @@ import org.springframework.stereotype.Component;
 @Component
 public class RefundGenerationService {
 
-  public void generateReport(Path refundsFile, List<Refund> refunds, String key, String salt) {
+  public void generateReport(Path refundsFile, List<Refund> refunds, String password, String salt) {
     try {
       String refundsJson = JsonUtils.toJson(refunds);
-      String jwe = CryptoUtils.encryptAsJwe(refundsJson, key, salt);
+      String jwe = CryptoUtils.encryptAsJwe(refundsJson, password, salt);
       Files.writeString(refundsFile, jwe);
     } catch (IOException e) {
       throw new RuntimeException(e);

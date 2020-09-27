@@ -12,7 +12,7 @@ public class PaymentsApplication implements CommandLineRunner {
 
   @Autowired private PaymentService paymentService;
 
-  @Value("${refundsPath:data/refunds.aes}")
+  @Value("${refundsPath:data/refunds.jwe}")
   private String refundsPath;
 
   @Value("${refunds.password}")
