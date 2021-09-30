@@ -27,10 +27,10 @@ public class CryptoUtils {
 
   public static String encryptAsJwe(String content, byte[] key) {
     try {
-      JWEHeader header = new JWEHeader(JWEAlgorithm.DIR, EncryptionMethod.A256GCM);
-      Payload payload = new Payload(content);
-      JWEObject jweObject = new JWEObject(header, payload);
-      SecretKeySpec aesKey = new SecretKeySpec(key, "AES");
+      var header = new JWEHeader(JWEAlgorithm.DIR, EncryptionMethod.A256GCM);
+      var payload = new Payload(content);
+      var jweObject = new JWEObject(header, payload);
+      var aesKey = new SecretKeySpec(key, "AES");
       jweObject.encrypt(new DirectEncrypter(aesKey));
       return jweObject.serialize();
     } catch (JOSEException e) {
